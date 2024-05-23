@@ -1,0 +1,393 @@
+
+html,body {
+    margin: 0;
+    padding:0; 
+    text-align: center;
+}
+
+*{
+    font-family:cursive;
+
+}
+
+.home{
+    margin-top: 25vh;
+}
+
+
+/* buttons */
+
+.primary-button{
+    color: #fdfdfd;
+    text-transform:capitalize;
+    font-size:40px;
+    font-weight:200;
+    background: linear-gradient(15deg, rgb(254, 48, 114), rgb(255, 89, 64));
+    padding: 15px,10px;
+    border-radius: 15px;
+    border: none;
+    display: inline-block; 
+    margin-left: 30px;
+    margin-right: 1500px;
+    border: solid;
+    border-color: rgba(255, 255, 255, 0.518);
+    border-width: 1px;
+    
+}
+
+.primary-button:hover
+{
+    background: linear-gradient(100deg, rgb(144, 32, 65),rgb(244, 81, 55));
+    
+} 
+
+.primary-title{
+    margin: 30px;
+    font-size: 70px;
+    text-align:start;
+
+}
+
+.secondary-button{
+    color: rgb(254, 254, 254);
+    color: black;
+    font-weight: 500;
+    font-size: large;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    border-radius: 20px;
+    border: solid 2px rgba(161, 159, 159, 0.711);
+    margin: 8px;
+
+}
+
+.secondary-button:hover{
+    color: rgb(144, 32, 65);
+    font-weight: 500;
+    border: solid 2px rgba(63, 62, 62, 0.6);
+
+}
+
+body{
+text-align: center;
+}
+
+
+/* Logo and navigation button */
+
+nav {
+width: 100%;
+height: 80px;
+display:flex;
+justify-content: space-between;
+
+}
+nav .nav-button {
+    color: rgb(254, 254, 254);
+    background-color:   rgb(219, 29, 105);
+    font-size: 25px;
+    font-family: cursive;
+    font-weight:300;
+    height: 50px;
+    width: auto;  
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    margin: 40px;
+}
+
+.nav-button:disabled{
+    background-color: rgba(187, 74, 218, 0.227);
+    color: rgba(0, 0, 0, 0.956);;
+}
+
+.logo{
+height: 200px;
+width: auto;
+margin: 15px;
+padding: auto;
+border-radius: 20px ;
+}
+
+nav.logo-container {
+    width:auto;
+    height:200px;
+    margin: 15px;
+}
+
+nav.logo-conatiner.logo{
+    width: 100%;
+}
+
+.overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: linear-gradient(
+        to top,
+        rgba(22, 84, 183, 0.627) 0%,
+        rgba(0, 0, 0, 0.114) 80%
+    ), url('images/couple-embraced-within-giant-smartphone-against-gradient-blue-pink-background-with-floating_155027-7281\ \(1\).jpg') top/100% 60% no-repeat;
+    background-size: cover;
+    border-radius: 0 0 50% 50%;
+}
+
+
+
+
+/*---modal*/
+.auth-modal{
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 50px;
+    margin-top: 100px;
+    margin-left:auto;
+    margin-right: auto;
+    max-width: 500px;
+    height: 650px;
+    background: linear-gradient(
+        to bottom,
+        rgb(96, 130, 198) 0%,
+        rgb(255, 255, 255) 80% );
+    border-radius: 10px;
+    padding: 1px;
+    font-weight: 100;
+
+
+}
+
+.auth-modal .close-icon{
+float: right;
+margin-right: 15px;
+}
+
+.auth-modal form{
+    display: flex;
+    flex-direction: column;
+    
+    
+}
+.auth-modal input[type=password],
+ .auth-modal input[type=email]{
+    padding: 8px;
+    margin: 8px;
+    font-size: 17px;
+    border: #fdfdfd;
+    border-radius: 8px;
+    
+}
+
+/* Onboarding page */
+
+.onboarding {
+    margin-top:130px;
+    border-top: solid 1px rgb(175, 172, 172);
+}
+
+.onboarding form {
+    display: flex;
+    font-size: large;
+    padding: 10px;
+    justify-content: center;
+}
+
+.onboarding form section {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 35%;
+    text-align: start;
+}
+
+.onboarding form input {
+    padding: 10px 30px;
+    margin: 5px 0;
+    font-size: 15px;
+    border: solid 2px rgb(219, 219, 219);
+    border-radius: 10px;
+}
+
+
+.onboarding form label {
+    margin: 10px 0;
+}
+
+.onboarding form .multiple-input-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.onboarding form input::-webkit-outer-spin-button,
+.onboarding form input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.onboarding form .multiple-input-container input {
+    margin-right: 10px;
+}
+
+.onboarding form .multiple-input-container label {
+    padding: 10px;
+    border: solid 2px rgb(144, 144, 144);
+    border-radius: 10px;
+    transition: all 0.3s;
+    margin-right: 10px;
+}
+
+.onboarding form input[type=radio] {
+    display: none;
+}
+
+.onboarding form input[type=number] {
+    width: 10%;
+}
+
+.onboarding form input[type=radio]:checked + label {
+    border: solid 2px rgb(221, 39, 22);
+}
+
+.onboarding form input[type=submit]:hover {
+    background-color: rgb(235, 235, 235);
+}
+
+.onboarding form input[type=submit]:active {
+    background-color: rgb(226, 115, 115);
+}
+
+.onboarding form .photo-container img {
+    width: 100%
+}
+
+form-group {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .form-group label {
+    margin-right: 10px; 
+      }
+
+
+    /* DashBoard */
+
+    .dashboard {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .dashboard .swipe-container {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    .swipe {
+        position: absolute;
+    }
+    
+    .dashboard .card-container {
+        width: 400px;
+        height: 650px;
+
+    }
+    
+    .card {
+        width: 400px; 
+        height: 650px;
+        box-shadow: 0px 0px 40px 0px rgb(189, 183, 183);
+        border-radius: 30px;
+        background-size: cover;
+        background-position: center;
+            
+    }
+    
+    .card h3 {
+        margin-top: 0;
+    }
+    
+    .dashboard .swipe-info {
+        position: absolute;
+        bottom: 0;
+        padding: 10px;
+    }
+    
+    /*-------- Chat Container --------*/
+.chat-container {
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(143, 143, 143, 0.988) 5px 16px 34px 5px,
+    rgb(195, 195, 195) 5px 16px 34px 5px;
+    width: 30%;
+    text-align: left;
+    z-index: 1;
+    
+}
+
+.chat-container .chat-container-header {
+    background: linear-gradient(45deg, rgb(235, 71, 123), rgb(255, 89, 64));
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-container .option {
+    border: none;
+    background-color: rgb(255, 255, 255);
+    border-bottom: solid 4px rgb(0, 0, 0);
+    font-size: 20px;
+    margin: 2px;
+    padding: 10px;
+}
+.chat-container .option:disabled {
+    border-bottom: solid 4px rgb(255, 255, 255);
+}
+
+.chat-container .profile,
+.chat-container .log-out-icon {
+    display: flex;
+    font-size:large;
+    align-items: center;
+    padding: 20px;
+    color: rgb(9, 9, 9);
+}
+
+.img-container {
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 10px;
+    
+}
+
+.img-container img {
+    width: 170%;
+    height: 100%
+}
+
+/*Chat Display */
+.chat-display{
+    padding: 20px;
+    height: 27vh;
+    overflow-y: auto;
+}
+
+.matches-display {
+    padding: 20px;
+    height: 27vh;
+    overflow-y: auto;
+}
+
+/* Chat Input */
+.chat-input {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
