@@ -73,7 +73,7 @@ text-align: center;
 }
 
 
-/* Logo and navigation button */
+/* Logo and nav button */
 
 nav {
 width: 100%;
@@ -135,7 +135,7 @@ nav.logo-conatiner.logo{
 
 
 
-/*---modal*/
+
 .auth-modal{
     position:absolute;
     left: 0;
@@ -318,7 +318,7 @@ form-group {
         padding: 10px;
     }
     
-    /*-------- Chat Container --------*/
+    /* Chat Container*/
 .chat-container {
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(143, 143, 143, 0.988) 5px 16px 34px 5px,
