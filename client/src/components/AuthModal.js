@@ -2,70 +2,55 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import API_URL from "../api";
 
-const AuthModal = ({ setShowModal, setIsSignUp, isSignUp }) => {
+const AuthModal = ({ setShowModal, isSignUp }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [error, setError] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [, setCookie] = useCookies(["user"]);
 
-  const handleClick = () => {
-    setShowModal(false);
-  };
-  let navigate = useNavigate();
+  const handleClick = () => setShowModal(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isSignUp && password !== confirmPassword) {
-        setError("Passwors are not same !!");
+        setError("Passwords are not the same.");
         return;
       }
-      console.log("posting ", email, password);
+
       const response = await axios.post(
-        `http://localhost:8000/${isSignUp ? "signup" : "login"}`,
-        {
-          email,
-          password,
-        }
+        `${API_URL}/${isSignUp ? "signup" : "login"}`,
+        { email, password }
       );
 
       setCookie("AuthToken", response.data.token);
       setCookie("UserId", response.data.userId);
 
-      const success = response.status === 201;
-      if (success && isSignUp) navigate("/onboarding");
-      if (success && !isSignUp) navigate("/dashboard");
-      window.location.reload();
+      if (isSignUp) {
+        navigate("/onboarding");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.log(error);
+      setError(error.response?.data || "Something went wrong. Please try again.");
     }
   };
 
   return (
     <div className="auth-modal">
       <div className="close-icon" onClick={handleClick}>
-        {" "}
         <h4>❌</h4>
-      </div>{" "}
-      <br />{" "}
-      <h2>
-        {isSignUp ? (
-          <h2>
-            <b>Get Started </b>{" "}
-          </h2>
-        ) : (
-          <h2>
-            {" "}
-            <b>Log In</b>{" "}
-          </h2>
-        )}
-      </h2>
+      </div>
+      <br />
+      <h2><b>{isSignUp ? "Get Started" : "Log In"}</b></h2>
       <p>
-        {" "}
         By clicking Log In, you agree to my terms. Learn how I process your data
-        in my Privacy Policy and Cookie Policy.{" "}
+        in my Privacy Policy and Cookie Policy.
       </p>
       <form onSubmit={handleSubmit}>
         <input
@@ -73,26 +58,24 @@ const AuthModal = ({ setShowModal, setIsSignUp, isSignUp }) => {
           id="email"
           name="email"
           placeholder="email"
-          required={true}
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
-
         <input
           type="password"
           id="password"
           name="password"
           placeholder="password"
-          required={true}
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
-
         {isSignUp && (
           <input
             type="password"
             id="password-check"
             name="password-check"
             placeholder="confirm password"
-            required={true}
+            required
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         )}
@@ -106,4 +89,5 @@ const AuthModal = ({ setShowModal, setIsSignUp, isSignUp }) => {
     </div>
   );
 };
+
 export default AuthModal;
