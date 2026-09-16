@@ -1,7 +1,8 @@
 import Chat from "./Chat";
 import ChatInput from "./ChatInput";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import API_URL from "../api";
 
 const ChatDisplay = ({ user, clickedUser }) => {
   const userId = user?.user_id;
@@ -9,53 +10,55 @@ const ChatDisplay = ({ user, clickedUser }) => {
   const [usersMessages, setUsersMessages] = useState(null);
   const [clickedUsersMessages, setClickedUsersMessages] = useState(null);
 
-  const getUsersMessages = async () => {
+  const getUsersMessages = useCallback(async () => {
+    if (!userId || !clickedUserId) return;
     try {
-      const response = await axios.get("http://localhost:8000/messages", {
-        params: { userId: userId, correspondingUserId: clickedUserId },
+      const response = await axios.get(`${API_URL}/messages`, {
+        params: { userId, correspondingUserId: clickedUserId },
       });
       setUsersMessages(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [userId, clickedUserId]);
 
-  const getClickedUsersMessages = async () => {
+  const getClickedUsersMessages = useCallback(async () => {
+    if (!userId || !clickedUserId) return;
     try {
-      const response = await axios.get("http://localhost:8000/messages", {
+      const response = await axios.get(`${API_URL}/messages`, {
         params: { userId: clickedUserId, correspondingUserId: userId },
       });
       setClickedUsersMessages(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [userId, clickedUserId]);
 
   useEffect(() => {
     getUsersMessages();
     getClickedUsersMessages();
-  }, []);
-  const messages = [];
+  }, [getUsersMessages, getClickedUsersMessages]);
 
+  const messages = [];
   usersMessages?.forEach((message) => {
-    const formattedMessage = {};
-    formattedMessage["name"] = user?.first_name;
-    formattedMessage["img"] = user?.url;
-    formattedMessage["message"] = message.message;
-    formattedMessage["timestamp"] = message.timestamp;
-    messages.push(formattedMessage);
+    messages.push({
+      name: user?.first_name,
+      img: user?.url,
+      message: message.message,
+      timestamp: message.timestamp,
+    });
   });
 
   clickedUsersMessages?.forEach((message) => {
-    const formattedMessage = {};
-    formattedMessage["name"] = clickedUser?.first_name;
-    formattedMessage["img"] = clickedUser?.url;
-    formattedMessage["message"] = message.message;
-    formattedMessage["timestamp"] = message.timestamp;
-    messages.push(formattedMessage);
+    messages.push({
+      name: clickedUser?.first_name,
+      img: clickedUser?.url,
+      message: message.message,
+      timestamp: message.timestamp,
+    });
   });
 
-  const descendingOrderMessages = messages?.sort((a, b) =>
+  const descendingOrderMessages = messages.sort((a, b) =>
     a.timestamp.localeCompare(b.timestamp)
   );
 
