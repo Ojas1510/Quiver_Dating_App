@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import API_URL from "../api";
 
 const ChatInput = ({
   user,
@@ -20,7 +21,7 @@ const ChatInput = ({
     };
 
     try {
-      await axios.post("http://localhost:8000/message", { message });
+      await axios.post(`${API_URL}/message`, { message });
       getUserMessages();
       getClickedUsersMessages();
       setTextArea("");
