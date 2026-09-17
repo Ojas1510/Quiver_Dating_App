@@ -9,6 +9,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 const uri = process.env.MONGO_DB_URL;
 const JWT_SECRET = process.env.JWT_SECRET;
+const CLIENT_URL = process.env.CLIENT_URL || "*";
 
 if (!uri) throw new Error("MONGO_DB_URL is not configured");
 if (!JWT_SECRET) throw new Error("JWT_SECRET is not configured");
@@ -16,9 +17,13 @@ if (!JWT_SECRET) throw new Error("JWT_SECRET is not configured");
 const app = express();
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || true,
+    origin: CLIENT_URL,
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
+app.options("*", cors({ origin: CLIENT_URL, credentials: true }));
 app.use(express.json());
 
 const getDatabase = async () => {
