@@ -1,13 +1,15 @@
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useCookies } from "react-cookie";
 import API_URL from "../api";
 
 const MatchesDisplay = ({ matches, setClickedUser }) => {
   const [matchedProfiles, setMatchedProfiles] = useState(null);
   const [cookies] = useCookies(["user"]);
-  const matchedUserIds = matches.map(({ user_id }) => user_id);
-  const matchedUserIdsKey = matchedUserIds.join(",");
+  const matchedUserIds = useMemo(
+    () => matches.map(({ user_id }) => user_id),
+    [matches]
+  );
   const userId = cookies.UserId;
 
   const getMatches = useCallback(async () => {
@@ -19,7 +21,7 @@ const MatchesDisplay = ({ matches, setClickedUser }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [matchedUserIdsKey]);
+  }, [matchedUserIds]);
 
   useEffect(() => {
     getMatches();
