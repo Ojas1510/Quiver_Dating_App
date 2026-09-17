@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie";
 
 const ChatHeader = ({ user }) => {
-  const [cookies, , removeCookie] = useCookies(["user"]);
+  const [, , removeCookie] = useCookies(["user"]);
 
   const logout = () => {
     removeCookie("UserId");
